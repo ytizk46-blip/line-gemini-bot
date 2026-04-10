@@ -39,14 +39,14 @@ def handle_message(event):
     try:
         # ここでGeminiに問い合わせ
         response = client.models.generate_content(
-            model="gemini-3-flash", # ここを変更！
+            model="gemini-2.5-flash", # ここを変更！
             contents=event.message.text
         
         )
         reply_text = response.text
     except Exception as e:
         print(f"Error: {e}")
-        reply_text = "ごめんなさい、エラーが発生しました。"
+        reply_text = "エラーが発生しました。"
 
     line_bot_api.reply_message(
         event.reply_token,
