@@ -39,8 +39,9 @@ def handle_message(event):
     try:
         # ここでGeminiに問い合わせ
         response = client.models.generate_content(
-            model="gemini-flash-latest",
+            model="gemini-3-flash", # ここを変更！
             contents=event.message.text
+        
         )
         reply_text = response.text
     except Exception as e:
