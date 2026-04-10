@@ -1,4 +1,6 @@
 import os
+import datetime  # 👈 これを追加します！
+
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
