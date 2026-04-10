@@ -1,5 +1,5 @@
 import os
-import datetime  # 👈 これを追加します！
+import datetime  
 
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
@@ -45,7 +45,7 @@ def handle_message(event):
         # Gemma向けに、ユーザーのメッセージの中にこっそり日付情報を混ぜ込む
         prompt_text = f"【システム情報：現在は{now}です。これを踏まえて返信してください。】\n\n{event.message.text}"
         
-        # モデル名を「gemma-3-1b-it」に変更！（"it"は対話向けモデルという意味です）
+        # モデル名
         response = client.models.generate_content(
             model="gemma-3-1b-it", 
             contents=prompt_text
