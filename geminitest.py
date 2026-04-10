@@ -37,13 +37,19 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     try:
-        # ここでGeminiに問い合わせ
-        response = client.models.generate_content(
-            model="gemini-2.5-flash", # ここを変更！
-            contents=event.message.text
+        # 現在時刻を取得
+        now = datetime.datetime.now().strftime("%Y年%m月%d日")
         
+        # Gemma向けに、ユーザーのメッセージの中にこっそり日付情報を混ぜ込む
+        prompt_text = f"【システム情報：現在は{now}です。これを踏まえて返信してください。】\n\n{event.message.text}"
+        
+        # モデル名を「gemma-3-1b-it」に変更！（"it"は対話向けモデルという意味です）
+        response = client.models.generate_content(
+            model="gemma-3-1b-it", 
+            contents=prompt_text
         )
         reply_text = response.text
+
     except Exception as e:
         print(f"Error: {e}")
         reply_text = "エラーが発生しました。"
