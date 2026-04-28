@@ -41,7 +41,7 @@ def handle_message(event):
     try:
         response = client.models.generate_content(
             model="gemma-3-1b-it", 
-            contents=prompt_text
+            contents=event.message.text
         )
         reply_text = response.text
 
