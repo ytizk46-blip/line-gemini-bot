@@ -39,13 +39,6 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     try:
-        # 現在時刻を取得
-        now = datetime.datetime.now().strftime("%Y年%m月%d日")
-        
-        # Gemma向けに、ユーザーのメッセージの中にこっそり日付情報を混ぜ込む
-        prompt_text = f"【システム情報：現在は{now}です。これを踏まえて返信してください。】\n\n{event.message.text}"
-        
-        # モデル名
         response = client.models.generate_content(
             model="gemma-3-1b-it", 
             contents=prompt_text
